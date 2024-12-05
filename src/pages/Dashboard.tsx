@@ -1,6 +1,6 @@
 // src/pages/Dashboard.tsx
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -180,7 +180,7 @@ const Dashboard = () => {
     };
 
     fetchRepoInfo();
-  }, []);
+  }, );
 
   if (loading) {
     return (
@@ -279,7 +279,9 @@ const Dashboard = () => {
             onClose={() => setIsScoutDialogOpen(false)}
             headerTitle="Add a Repository"
             onSubmit={(formData) => {
-              console.log("Form submitted:", formData);
+              console.log("Scouting repository:", formData);
+              setIsScoutDialogOpen(false);
+
             }}
           />
           <Button variant="outline" onClick={navigateToTenants}>
@@ -419,7 +421,9 @@ const Dashboard = () => {
                           repo_scout_id={data.repo_scout_id}
                           image={data.deployments[0].deployment_info.image}
                           onSubmit={(formData) => {
-                            console.log("Form submitted:", formData);
+                            console.log("Deploying with form data:", formData);
+                            setIsDeployDialogOpen(false);
+
                           }}
                         />
                         <UpdateDialog
@@ -428,7 +432,9 @@ const Dashboard = () => {
                           name={data.deployments[0].deployment_info.deployment_name}
                           image={data.deployments[0].deployment_info.image}
                           onSubmit={(formData) => {
-                            console.log("Form submitted:", formData);
+                            console.log("Updating with form data:", formData);
+                            setIsUpdateDialogOpen(false);
+
                           }}
                         />
                       </div>
